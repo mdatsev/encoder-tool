@@ -26,7 +26,7 @@
         const encoded = windows1251.encode(encodeInput.value, {
           mode: "html",
         });
-        encodeOutput.textContent = encoded;
+        encodeOutput.innerHTML = encoded;
       });
 
       encodeInput.addEventListener("keydown", (e) => {
