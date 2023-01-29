@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>windows1251</title>
+    <style>
+      body > * {
+        width: 50%;
+        font-size: 24px;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, sans-serif;
+        padding: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/windows-1251@1.0.0/windows-1251.js"></script>
+    <div>windows1251</div>
+    <input id="encode-input" />
+    <div id="encode-output"></div>
+    <script>
+      const encodeInput = document.querySelector("#encode-input");
+      const encodeOutput = document.querySelector("#encode-output");
+
+      encodeInput.focus();
+      encodeInput.addEventListener("input", () => {
+        const encoded = windows1251.encode(encodeInput.value, {
+          mode: "html",
+        });
+        encodeOutput.textContent = encoded;
+      });
+
+      encodeInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+          e.preventDefault();
+          // copy the text from the output div
+          const range = document.createRange();
+          range.selectNode(encodeOutput);
+          window.getSelection().removeAllRanges();
+          window.getSelection().addRange(range);
+          document.execCommand("copy");
+          window.getSelection().removeAllRanges();
+        }
+      });
+    </script>
+  </body>
+</html>
